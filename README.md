@@ -20,7 +20,7 @@ It can be used with any exchange, given changes to the API calls and data stream
 - [Binance](https://binance.com)
 
 ## Further Documentation
-I invite you to read my blog for a more broad explanation of the code.
+I invite you to read my [blog](https://metaverseportfolio.substack.com/p/arbitragetrading) for a more broad explanation of the code.
 
 ## Disclaimer
 This software is for educational purposes only. Do not risk money which you are afraid to lose. USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
