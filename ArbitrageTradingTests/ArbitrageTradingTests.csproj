@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Arbitrage Trading\Arbitrage Trading.csproj" />
+    <ProjectReference Include="..\source\Arbitrage Trading.csproj" />
   </ItemGroup>
 
 </Project>
