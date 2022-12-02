@@ -1,6 +1,6 @@
 # CryptoExchangeArbitrageTrading
 
-![image](![image](https://user-images.githubusercontent.com/39993978/205335610-ef31052f-db2c-4dac-80f6-7e9a5b81c7a2.png))
+![image](https://user-images.githubusercontent.com/39993978/205335610-ef31052f-db2c-4dac-80f6-7e9a5b81c7a2.png)
 
 This source code contains a bot for leveraging arbitrage opportunities in crypto exchanges, specifically Binance.
 It can be used with any exchange, given changes to the API calls and data stream.
