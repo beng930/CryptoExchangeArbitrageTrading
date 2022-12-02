@@ -1,4 +1,5 @@
 # CryptoExchangeArbitrageTrading
+![workflow](https://github.com/beng930/CryptoExchangeArbitrageTrading/actions/workflows/UnitTests.yml/badge.svg)
 
 ![image](https://user-images.githubusercontent.com/39993978/205335610-ef31052f-db2c-4dac-80f6-7e9a5b81c7a2.png)
 
