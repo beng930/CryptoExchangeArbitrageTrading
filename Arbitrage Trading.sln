@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32901.82
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbitrage Trading", "Arbitrage Trading\Arbitrage Trading.csproj", "{D12EA3B0-51BB-433E-ACA2-EC039B61D512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "source", "source\Arbitrage Trading.csproj", "{D12EA3B0-51BB-433E-ACA2-EC039B61D512}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArbitrageTradingTests", "ArbitrageTradingTests\ArbitrageTradingTests.csproj", "{F5D9205E-2211-4C38-819E-EBB0282D293E}"
 EndProject
