@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on:  windows-latest
     strategy:
       matrix:
         dotnet-version: [ '3.1.x' ]
@@ -23,12 +23,16 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Run Build
       run: dotnet build
+      
     - name: Run UnitTests
       run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      
     - name: Upload Test Results
       uses: actions/upload-artifact@v3
       with:
