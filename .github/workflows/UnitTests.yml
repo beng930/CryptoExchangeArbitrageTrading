@@ -12,11 +12,13 @@ on:
 jobs:
   build:
 
-    runs-on:  windows-latest
+    runs-on:  ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.1.x' ]
-
+        include:
+        - dotnet-version: '3.1.x'
+          tfm: 'netcoreapp3.1'
+          
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
@@ -25,13 +27,13 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
         
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore -p:TargetFramework=${{ matrix.tfm }}
       
     - name: Run Build
       run: dotnet build
       
     - name: Run UnitTests
-      run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}" -f=${{ matrix.tfm }}
       
     - name: Upload Test Results
       uses: actions/upload-artifact@v3
