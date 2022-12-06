@@ -17,8 +17,8 @@ namespace Arbitrage_Trading.BusinessLogic
         private readonly ILoggerService loggerService;
         private readonly IArbitrageDal arbitrageDal;
         private readonly ExchangeInformation exchangeInformation;
-        private Graph graph;
-        private GraphUtils graphUtils;
+        public Graph graph;
+        public GraphUtils graphUtils;
 
         private const decimal initialUSDTAmount = 18;
         private const decimal AtomicityFactorConst = 0.00001M;
@@ -35,7 +35,7 @@ namespace Arbitrage_Trading.BusinessLogic
 
             this.graph = new Graph(CoinsGraphEntries);
             this.graphUtils = new GraphUtils(CoinsGraphEntries, graph);
-            this.graphUtils.FillExchangeArray(BuildExchangeGraph(graph));
+            BuildExchangeGraph(graph);
         }
 
         public async Task RunBusinessLogic()
@@ -51,7 +51,7 @@ namespace Arbitrage_Trading.BusinessLogic
 
                 if (currencyAmount > 0 && list.Count > 0 && list.Count() <= 6)
                 {
-                    loggerService.LogChosenPath(list, currencyAmount, NumberOfSupportedCoins);
+                    loggerService.LogChosenPath(list, currencyAmount, list.Count);
                     List<decimal> MarketOrdersAmounts = new List<decimal> { initialUSDTAmount };
                     Console.Write(list[0] + " --> ");
 
@@ -91,12 +91,11 @@ namespace Arbitrage_Trading.BusinessLogic
             }
         }
 
-        private decimal[][] BuildExchangeGraph(Graph graph)
+        private void BuildExchangeGraph(Graph graph)
         {
             try
             {
                 var tickerInfoTask = Task.Run(() => arbitrageDal.TickerPrices(System.Text.Json.JsonSerializer.Serialize(ArbitrageConstants.tickers)));
-                var exchangeRates = CreateExchangeRateArray();
                 tickerInfoTask.Wait();
                 var tickersList = JsonConvert.DeserializeObject<List<BookTickerInfo>>(tickerInfoTask.Result);
 
@@ -108,17 +107,14 @@ namespace Arbitrage_Trading.BusinessLogic
                         var ticker = tickersList.Find(element => element.symbol == $"{firstCoin}{secondCoin}");
                         if (ticker != default)
                         {
-                            AddTickerToExchangeGraph(graph, exchangeRates, ticker, firstCoin, secondCoin);
+                            AddTickerToExchangeGraph(graph, ticker, firstCoin, secondCoin);
                         }
                     }
                 }
-
-                return exchangeRates;
             }
             catch (Exception ex)
             {
                 loggerService.LogError(ex);
-                return null;
             }
         }
 
@@ -199,7 +195,7 @@ namespace Arbitrage_Trading.BusinessLogic
             return exchangeRates;
         }
 
-        private void AddTickerToExchangeGraph(Graph graph, decimal[][] exchangeRates, BookTickerInfo ticker, string firstCoin, string secondCoin, bool isUpdate = true)
+        private void AddTickerToExchangeGraph(Graph graph, BookTickerInfo ticker, string firstCoin, string secondCoin, bool isUpdate = true)
         {
             var firstCoinId = ArbitrageConstants.symbolToNode[firstCoin];
             var secondCoinId = ArbitrageConstants.symbolToNode[secondCoin];
